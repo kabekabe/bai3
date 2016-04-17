@@ -14,8 +14,8 @@ use bai3;
 create table users (
 	user_id int not null primary key auto_increment,
 	username varchar(30) not null,
-	password_hash varchar(30) not null,
-	salt varchar(10) not null,
+	password_hash varchar(12) not null,
+	salt varchar(4) not null,
 	last_login timestamp default 0,
 	last_bad_login timestamp default 0,
 	login_attempts int default 0,
