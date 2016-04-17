@@ -1,15 +1,15 @@
 -- delete db
-use bai2;
+use bai3;
 drop table users;
 drop table unregistered_users;
 drop table allowed_messages;
 drop table messages;
-drop database bai2;
+drop database bai3;
 
 
 -- create db
-create database bai2;
-use bai2;
+create database bai3;
+use bai3;
 
 create table users (
 	user_id int not null primary key auto_increment,
@@ -56,13 +56,37 @@ create table allowed_messages (
 );
 
 
+-- trigger
+delimiter $$
+create trigger hash_passwords_insert
+before insert on users
+for each row
+begin
+	declare s varchar(10);
+	set s = concat(char(round(rand()*25)+97), round(rand()*25)+97, char(round(rand()*25)+97), round(rand()*25)+97,
+	char(round(rand()*25)+97), char(round(rand()*25)+97), char(round(rand()*25)+97), round(rand()*25)+97),
+	new.password_hash = md5(concat(new.password_hash, s)),
+	new.salt = s;
+end$$
+create trigger hash_passwords_update
+before update on users
+for each row
+begin
+	declare s varchar(10);
+	set s = concat(char(round(rand()*25)+97), round(rand()*25)+97, char(round(rand()*25)+97), round(rand()*25)+97,
+	char(round(rand()*25)+97), char(round(rand()*25)+97), char(round(rand()*25)+97), round(rand()*25)+97),
+	new.password_hash = md5(concat(new.password_hash, s)),
+	new.salt = s;
+end$$
+delimiter ;
+
 -- populate db
 insert into users (username, password_hash, salt, block_after, ret_question, ret_answer) values
 	('user1', 'pass1', 'abc', 8, 'Ulubiony film?', 'Interstellar');
 insert into users (username, password_hash, salt, block_after, ret_question, ret_answer) values
 	('user2', 'pass2', '1a2b', 3, 'Ulubiony kolor?', 'Niebieski');
 insert into users (username, password_hash, salt) values
-	('user3', 'pass3', 'asdjf;as');
+	('user3', 'pass3', 'asdjf;as');	
 
 insert into messages (text, owner) values
 	('wiadomosc 1', 1);
