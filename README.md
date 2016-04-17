@@ -1,23 +1,43 @@
 # Bezpieczeństwo aplikacji internetowych
-Projekt 2 - Implementacja formularz logowania
+Projekt 3 - Generowanie haseł
 
 Zadania:
-Dla całego projektu za nieistotne należy uznać problemy związane z  bezpieczeństwem połączenia z bazą danych oraz pobierania z niej danych, które będą rozwijane na kolejnych zajęciach. Dla wszystkich zadań jako domyślną metodę przesyłania parametrów zastosuj metodę GET.
 
-1. Zaimplementuj formularz logowania użytkowników (1 punkt).
+Dla całego projektu za nieistotne należy uznać problemy związane z bezpieczeństwem połączenia z bazą danych oraz pobierania z niej danych, które będą rozwijane na kolejnych zajęciach. Dla wszystkich zadań jako domyślną metodę przesyłania parametrów zastosuj metodę GET.
 
-2. Udostępnij użytkownikowi możliwość włączenia/wyłączenia blokowania konta po n nieudanych próbach logowania gdzie n jest dowolną liczną naturalną. Jakie niesie za sobą zagrożenia takie rozwiązanie? Jak powinna wyglądać procedura odblokowania konta? Czy wykorzystanie sekretnego pytania oraz odpowiedzi jest dobrym rozwiązaniem? Nie przechowuj informacji o liczbie nieudanych prób logowania w cookes!
+1. Udostępnij użytkownikowi możliwość logowania przy użyciu losowo wybranych fragmentów haseł. Hasła powinny być przechowywane po stronie serwera z wykorzystaniem funkcji hashujących oraz soli. Hasła powinny spełniać następujące kryteria:
 
-3. Zaimplementuj logowanie zdarzeń takich jak:
-	a) data ostatniego nieudanego logowania,
-	b) data ostatniego udanego logowania (ostatnie a nie obecne logowanie),
-	c) liczba nieudanych logowań od ostatniego poprawnego logowania.
-	
-4. Dane z powyższych punktów udostępnij użytkownikowi (1 punkt).
+• długość hasła od 8 do 16 znaków,
 
-5. Zaimplementuj opóźnienie po nieudanym logowaniu wyliczane w zależności od liczby prób nieudanych logowań (nie używaj komendy sleep ani innych zawieszających proces/wątek po stronie serwera) (1 punkt).
+• co najmniej 5 znaków przy zapytaniu o fragment hasła,
 
-6. Jakie informacje udostępniasz użytkownikowi przy nieudanej próbie logowania? System nie powinien udostępniać informacji umożliwiających (pomagających) dokonanie włamania do projektowanego systemu.
+• maksymalnie zapytanie o fragment składający się z połowy hasła jednak nie mniej niż z 5-ciu znaków,
 
-7. Należy przechowywać informacje o próbie logowania do systemu użytkowników nieistniejących. Zachowanie związane z opóźnieniem logowania identyczne jak w przypadku użytkowników zarejestrowanych w systemie. Jaki ma to związek z powyższym punktem? (1 punkt)
+• należy sprawdzać ustawienie podawanych znaków na właściwych pozycjach we fragmencie hasła,
+
+• zmiana aktualnego hasła cząstkowego następuje po prawidłowym zalogowaniu - wymagana jest dodatkowa weryfikacja podczas próby zmiany hasła,
+
+• co najmniej dziesięć haseł cząstkowych dla każdego użytkownika,
+
+• należy uwzględnić wszystkie ograniczenia związane z odstępami czasu logowania oraz użytkownikami nienależącymi do systemu z poprzednich zajęć.
+
+2. Udostępnij użytkownikowi możliwość zmiany hasła.
+
+Testy:
+
+1. Czy dla użytkownika zmienia się wymagane hasło cząstkowe po wykonaniu zapytania? (nie)
+
+http://baipb.cba.pl/Ps08.php?login=ala&action=Dalej
+
+2. Czy dla hasa alamakota i maski 111110000 użytkownik zostanie zalogowany? (nie)
+
+http://baipb.cba.pl/Ps08.php?pass[5]=a&pass[6]=l&pass[7]=a&pass[8]=m&pass[9]=a&login=ala&action=Zaloguj
+
+3. Czy dla hasa alamakota i maski 111110000 użytkownik zostanie zalogowany? (tak)
+
+http://baipb.cba.pl/Ps08.php?pass[0]=a&pass[1]=l&pass[2]=a&pass[3]=m&pass[4]=a&login=ala&action=Zaloguj
+
+4. Czy użytkownikowi zmienia się wymagane hasło cząstkowe po nieprawidłowym logowaniu? (nie)
+
+5. Czy użytkownikowi zmienia się wymagane hasło cząstkowe po prawidłowym logowaniu? (tak)
 
