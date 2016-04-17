@@ -7,19 +7,19 @@ Dla całego projektu za nieistotne należy uznać problemy związane z bezpiecze
 
 1. Udostępnij użytkownikowi możliwość logowania przy użyciu losowo wybranych fragmentów haseł. Hasła powinny być przechowywane po stronie serwera z wykorzystaniem funkcji hashujących oraz soli. Hasła powinny spełniać następujące kryteria:
 
-• długość hasła od 8 do 16 znaków,
+	• długość hasła od 8 do 16 znaków,
 
-• co najmniej 5 znaków przy zapytaniu o fragment hasła,
+	• co najmniej 5 znaków przy zapytaniu o fragment hasła,
 
-• maksymalnie zapytanie o fragment składający się z połowy hasła jednak nie mniej niż z 5-ciu znaków,
+	• maksymalnie zapytanie o fragment składający się z połowy hasła jednak nie mniej niż z 5-ciu znaków,
 
-• należy sprawdzać ustawienie podawanych znaków na właściwych pozycjach we fragmencie hasła,
+	• należy sprawdzać ustawienie podawanych znaków na właściwych pozycjach we fragmencie hasła,
 
-• zmiana aktualnego hasła cząstkowego następuje po prawidłowym zalogowaniu - wymagana jest dodatkowa weryfikacja podczas próby zmiany hasła,
+	• zmiana aktualnego hasła cząstkowego następuje po prawidłowym zalogowaniu - wymagana jest dodatkowa weryfikacja podczas próby zmiany hasła,
 
-• co najmniej dziesięć haseł cząstkowych dla każdego użytkownika,
+	• co najmniej dziesięć haseł cząstkowych dla każdego użytkownika,
 
-• należy uwzględnić wszystkie ograniczenia związane z odstępami czasu logowania oraz użytkownikami nienależącymi do systemu z poprzednich zajęć.
+	• należy uwzględnić wszystkie ograniczenia związane z odstępami czasu logowania oraz użytkownikami nienależącymi do systemu z poprzednich zajęć.
 
 2. Udostępnij użytkownikowi możliwość zmiany hasła.
 
